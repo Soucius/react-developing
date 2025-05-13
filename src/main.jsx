@@ -1,6 +1,7 @@
 import { StrictMode } from "react";
 import { createRoot } from "react-dom/client";
 import "./index.css";
+import "bootstrap/dist/css/bootstrap.min.css";
 
 function App() {
   return (
@@ -12,22 +13,18 @@ function App() {
 }
 
 function Header() {
-  const headerStyles = {
-    color: "red",
-    fontSize: "30px",
-    textTransform: "uppercase",
-  };
-
   return (
     <div id="header">
-      <h1 style={headerStyles}>Header</h1>
-
-      <p>
-        Lorem ipsum dolor sit amet consectetur adipisicing elit. Voluptatum
-        ducimus molestiae consequatur distinctio assumenda reprehenderit
-        possimus aliquam! Quaerat quas vel id unde ipsum autem. Iusto optio
-        perferendis deserunt sit earum.
-      </p>
+      <nav
+        className="navbar navbar-expand-lg bg-dark border-bottom border-body"
+        data-bs-theme="dark"
+      >
+        <div className="container">
+          <a href="#" className="navbar-brand">
+            Movie App
+          </a>
+        </div>
+      </nav>
     </div>
   );
 }
@@ -39,7 +36,7 @@ function MovieList() {
       image: "1.jpg",
       title: "Captain America",
       description: "A nice film.",
-      is_active: false,
+      is_active: true,
       is_new: true,
     },
     {
@@ -47,7 +44,7 @@ function MovieList() {
       image: "2.jpg",
       title: "Car Thives",
       description: "A nice film.",
-      is_active: false,
+      is_active: true,
       is_new: true,
     },
     {
@@ -69,13 +66,16 @@ function MovieList() {
   ];
 
   return (
-    <div>
+    <div className="container">
       <h2 className="title">Movie List</h2>
 
       {movie_list.filter((m) => m.is_active).length == 0 ? (
         <div>Film not found</div>
       ) : (
-        <div id="movie-list">
+        <div
+          id="movie-list"
+          className="row row-cols-2 row-cols-md-3 row-cols-lg-4 g-4"
+        >
           {movie_list.map((m, index) => (
             <Movie key={index} movieObj={m} />
           ))}
@@ -87,19 +87,25 @@ function MovieList() {
 
 function Movie({ movieObj }) {
   return (
-    <>
+    <div className="col">
       {movieObj.is_active && (
-        <div className="movie">
-          <img src={"/img/" + movieObj.image} alt="" />
+        <div className="card movie position-relative">
+          <img src={"/img/" + movieObj.image} alt="" className="card-img-top" />
 
-          <h3 className={`f30 red ${movieObj.is_new ? "new f30" : ""}`}>
-            {movieObj.title}
-          </h3>
+          <div className="card-body">
+            <h2 className="h5 card-title">{movieObj.title}</h2>
 
-          <p>{movieObj.description}</p>
+            <p className="card-text mb-0">{movieObj.description}</p>
+
+            {movieObj.is_new && (
+              <span className="position-absolute top-0 end-0 badge bg-danger m-1">
+                New
+              </span>
+            )}
+          </div>
         </div>
       )}
-    </>
+    </div>
   );
 }
 
