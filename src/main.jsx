@@ -26,33 +26,61 @@ function Header() {
 }
 
 function MovieList() {
+  const movie_list = [
+    {
+      image: "1.jpg",
+      title: "Captain America",
+      description: "A nice film.",
+    },
+    {
+      image: "2.jpg",
+      title: "Car Thives",
+      description: "A nice film.",
+    },
+    {
+      image: "3.jpg",
+      title: "The Codes of War",
+      description: "A nice film.",
+    },
+  ];
+
   return (
     <div>
       <h2>Movie List</h2>
 
       <div id="movie-list">
-        <Movie />
-        <Movie />
-        <Movie />
+        <Movie
+          image={movie_list[0].image}
+          title={movie_list[0].title}
+          description={movie_list[0].description}
+        />
+
+        <Movie
+          image={movie_list[1].image}
+          title={movie_list[1].title}
+          description={movie_list[1].description}
+        />
+
+        <Movie
+          image={movie_list[2].image}
+          title={movie_list[2].title}
+          description={movie_list[2].description}
+        />
       </div>
     </div>
   );
 }
 
-function Movie() {
-  const movieObj = {
-    image: "1.jpg",
-    title: "Captain America",
-    description: "A nice film.",
-  };
+function Movie(props) {
+  console.log(props);
 
   return (
     <div className="movie">
-      <img src={"/img/" + movieObj.image} alt="" />
+      <img src={"/img/" + props.image} alt="" />
 
-      <h3>{movieObj.title}</h3>
+      <h3>{props.title}</h3>
 
-      <p>{movieObj.description}</p>
+      <p>{props.description}</p>
     </div>
   );
 }
