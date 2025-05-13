@@ -40,11 +40,19 @@ function MovieList() {
 }
 
 function Movie() {
+  const movieObj = {
+    image: "1.jpg",
+    title: "Captain America",
+    description: "A nice film.",
+  };
+
   return (
     <div className="movie">
-      <h3>Movie</h3>
+      <img src={"/img/" + movieObj.image} alt="" />
 
-      <p>Movie description</p>
+      <h3>{movieObj.title}</h3>
+
+      <p>{movieObj.description}</p>
     </div>
   );
 }
