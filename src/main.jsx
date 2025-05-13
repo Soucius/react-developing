@@ -12,9 +12,16 @@ function App() {
 }
 
 function Header() {
+  const headerStyles = {
+    color: "red",
+    fontSize: "30px",
+    textTransform: "uppercase",
+  };
+
   return (
     <div id="header">
-      <h1>Header</h1>
+      <h1 style={headerStyles}>Header</h1>
+
       <p>
         Lorem ipsum dolor sit amet consectetur adipisicing elit. Voluptatum
         ducimus molestiae consequatur distinctio assumenda reprehenderit
@@ -33,6 +40,7 @@ function MovieList() {
       title: "Captain America",
       description: "A nice film.",
       is_active: false,
+      is_new: true,
     },
     {
       id: 2,
@@ -40,26 +48,29 @@ function MovieList() {
       title: "Car Thives",
       description: "A nice film.",
       is_active: false,
+      is_new: true,
     },
     {
       id: 3,
       image: "3.jpg",
       title: "The Codes of War",
       description: "A nice film.",
-      is_active: false,
+      is_active: true,
+      is_new: false,
     },
     {
       id: 4,
       image: "4.jpg",
       title: "Moana 2",
       description: "A nice film.",
-      is_active: false,
+      is_active: true,
+      is_new: true,
     },
   ];
 
   return (
     <div>
-      <h2>Movie List</h2>
+      <h2 className="title">Movie List</h2>
 
       {movie_list.filter((m) => m.is_active).length == 0 ? (
         <div>Film not found</div>
@@ -81,7 +92,9 @@ function Movie({ movieObj }) {
         <div className="movie">
           <img src={"/img/" + movieObj.image} alt="" />
 
-          <h3>{movieObj.title}</h3>
+          <h3 className={`f30 red ${movieObj.is_new ? "new f30" : ""}`}>
+            {movieObj.title}
+          </h3>
 
           <p>{movieObj.description}</p>
         </div>
