@@ -32,24 +32,28 @@ function MovieList() {
       image: "1.jpg",
       title: "Captain America",
       description: "A nice film.",
+      is_active: false,
     },
     {
       id: 2,
       image: "2.jpg",
       title: "Car Thives",
       description: "A nice film.",
+      is_active: false,
     },
     {
       id: 3,
       image: "3.jpg",
       title: "The Codes of War",
       description: "A nice film.",
+      is_active: false,
     },
     {
       id: 4,
       image: "4.jpg",
       title: "Moana 2",
       description: "A nice film.",
+      is_active: false,
     },
   ];
 
@@ -57,24 +61,32 @@ function MovieList() {
     <div>
       <h2>Movie List</h2>
 
-      <div id="movie-list">
-        {movie_list.map((m, index) => (
-          <Movie key={index} movieObj={m} />
-        ))}
-      </div>
+      {movie_list.filter((m) => m.is_active).length == 0 ? (
+        <div>Film not found</div>
+      ) : (
+        <div id="movie-list">
+          {movie_list.map((m, index) => (
+            <Movie key={index} movieObj={m} />
+          ))}
+        </div>
+      )}
     </div>
   );
 }
 
 function Movie({ movieObj }) {
   return (
-    <div className="movie">
-      <img src={"/img/" + movieObj.image} alt="" />
+    <>
+      {movieObj.is_active && (
+        <div className="movie">
+          <img src={"/img/" + movieObj.image} alt="" />
 
-      <h3>{movieObj.title}</h3>
+          <h3>{movieObj.title}</h3>
 
-      <p>{movieObj.description}</p>
-    </div>
+          <p>{movieObj.description}</p>
+        </div>
+      )}
+    </>
   );
 }
 
